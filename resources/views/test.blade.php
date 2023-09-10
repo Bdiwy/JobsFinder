@@ -2,7 +2,8 @@
 
 
 @section('content')
-    
+@include('partials._hero') 
+@include('partials._search')   
 
 <div class="bg-gray-50 border border-gray-200 rounded p-6">
 
@@ -23,7 +24,7 @@
     />
     <div>
         <h3 class="text-2xl">
-            <a href="show.html">{{$l->title}}</a>
+            <a href="/listings/{{$l->id}}">{{$l->title}}</a>
         </h3>
         <div class="text-xl font-bold mb-4">{{$l->company}}</div>
         <ul class="flex">
