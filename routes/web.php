@@ -1,7 +1,8 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
 use App\Models\Listing;
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\listingControler;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,19 +14,9 @@ use App\Models\Listing;
 |
 */
 // All listings
-Route::get('/', function () {
-    return response(view('index', [
-        'heroes' => 'JobsFinder',
-        'Listings' => Listing::all() 
-    ]))->header('Ahmed-Bdiwy', 'XD');
-    
-});
+Route::get('/',  [listingControler::class,'index']); // routes
 
 
 // single listings
 
-Route::get('/listings/{listings}', function(Listing $listings){
-    return view('listings', [
-        'listings' =>$listings
-    ],);
-});
+Route::get('/listings/{listings}',[listingControler::class,'show']);
