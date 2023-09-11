@@ -4,7 +4,7 @@
                 ><i class="fa-solid fa-arrow-left"></i> Back
             </a>
             <div class="mx-4">
-                <div class="bg-gray-50 border border-gray-200 p-10 rounded">
+                <div class="bg-gray-50 border border-gray-200 rounded p-6 p-10">
                     <div
                         class="flex flex-col items-center justify-center text-center"
                     >
@@ -16,28 +16,8 @@
 
                         <h3 class="text-2xl mb-2">{{$listings->title}}</h3>
                         <div class="text-xl font-bold mb-4">{{$listings->company}}</div>
-                        <ul class="flex">
-                            <li
-                                class="bg-black text-white rounded-xl px-3 py-1 mr-2"
-                            >
-                                <a href="#">Laravel</a>
-                            </li>
-                            <li
-                                class="bg-black text-white rounded-xl px-3 py-1 mr-2"
-                            >
-                                <a href="#">API</a>
-                            </li>
-                            <li
-                                class="bg-black text-white rounded-xl px-3 py-1 mr-2"
-                            >
-                                <a href="">Backend</a>
-                            </li>
-                            <li
-                                class="bg-black text-white rounded-xl px-3 py-1 mr-2"
-                            >
-                                <a href="">Vue</a>
-                            </li>
-                        </ul>
+                        <x-listing-tags :tagsCsv="$listings->tags"/>
+
                         <div class="text-lg my-4">
                             <i class="fa-solid fa-location-dot"></i> {{$listings->location}}
                         </div>

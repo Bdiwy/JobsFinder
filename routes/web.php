@@ -14,20 +14,18 @@ use App\Models\Listing;
 */
 // All listings
 Route::get('/', function () {
-    return view('test', [
+    return response(view('index', [
         'heroes' => 'JobsFinder',
-
-        
-        'Listing' => Listing::all() 
+        'Listings' => Listing::all() 
+    ]))->header('Ahmed-Bdiwy', 'XD');
     
-    ]);
 });
 
 
 // single listings
 
-Route::get('/listings/{id}', function($id){
+Route::get('/listings/{listings}', function(Listing $listings){
     return view('listings', [
-        'listings' =>listing::find($id)
+        'listings' =>$listings
     ],);
 });
