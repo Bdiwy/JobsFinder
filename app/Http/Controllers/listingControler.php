@@ -42,8 +42,10 @@ class listingControler extends Controller
                 'tags' => 'required',
                 'description' => 'required'
             ]);
-    
             
+            if($request->hasFile('logo')) {
+                $formFields['logo'] = $request->file('logo')->store('logos', 'public');
+            }
             listing::create($formFields); 
             return redirect('/')->with('message','Job created successfully !!');
 
