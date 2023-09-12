@@ -18,7 +18,7 @@ class listingFactory extends Factory
     {
         return [
         'title' =>  $this->faker->sentence(),
-        'tags' =>  'laravel,cyber security,cloud',
+        'tag' =>  'laravel,cyber security,cloud',
         'company' =>  $this->faker->company(),
         'email' =>  $this->faker->companyEmail(),
         'website' =>  $this->faker->url(),
