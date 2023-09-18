@@ -4,27 +4,30 @@ use App\Models\Listing;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\listingControler;
 
-
-
-Route::group(['prefix'=>'listings'], function(){
-
-    
 // All listings
 Route::get('/',  [listingControler::class,'index']); // routes
 
-
-
-// single listings
-Route::get('/listings/create',[listingControler::class,'create']);
-
+Route::group(['prefix'=>'listings'], function(){
 
 //stores listings
 
-Route::post('/listings',[listingControler::class,'store']);
+Route::post('/',[listingControler::class,'store']);
+
+// single listings
+Route::get('/create',[listingControler::class,'create']);
+
+
+Route::get('/{listings}',[listingControler::class,'show']); // <-------
 
 
 
-Route::get('/listings/{listings}',[listingControler::class,'show']);
+Route::get('/{listings}/edit',[listingControler::class,'edit']);
+
+
+Route::post('/{listing}',[listingControler::class,'fuckIt']);// <-------
+
+
+Route::put('/{listing}',[listingControler::class,'update']);// <-------
 
 
 });
