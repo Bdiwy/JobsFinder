@@ -49,7 +49,7 @@
                     </div>
                 </div>
             
-            
+            @auth
             <x-card class="mt4 p-2 flex space-x-6">
                 <a href="/listings/{{$listings->id}}/edit">
                 <i class="fa-solid fa-pencil"></i>edit
@@ -59,8 +59,8 @@
                 @csrf
                 <button class="text-red-500"><i class="fa-solid fa-trash"></i>Delete</button>
                 </form>
-
-            </x-card>
+            </x-card>    
+            @endauth
             
             </div>
         </x-layout>
