@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Listing;
+use Faker\Provider\Lorem;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 
@@ -45,7 +46,7 @@ class listingControler extends Controller
             if($request->hasFile('logo')) {
                 $formFields['logo'] = $request->file('logo')->store('logos', 'public');
             }
-    
+            
             $formFields['user_id'] = auth()->id();
     
             Listing::create($formFields);
