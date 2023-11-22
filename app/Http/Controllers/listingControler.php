@@ -6,9 +6,11 @@ use App\Models\Listing;
 use Faker\Provider\Lorem;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
+use App\Traits\FileUpload;
 
 class listingControler extends Controller
 {
+    use FileUpload;
     // show all data
         public function index(){
             return response(view('listings.index', [
@@ -34,6 +36,7 @@ class listingControler extends Controller
 
         public function store(Request $request) {
             $formFields = $request->validate([
+                
                 'title' => 'required',
                 'company' => ['required', Rule::unique('listings', 'company')],
                 'location' => 'required',
@@ -43,17 +46,33 @@ class listingControler extends Controller
                 'description' => 'required'
             ]);
     
-            if($request->hasFile('logo')) {
-                $formFields['logo'] = $request->file('logo')->store('logos', 'public');
-            }
             
             $formFields['user_id'] = auth()->id();
     
-            Listing::create($formFields);
-    
-            return redirect('/')->with('message', 'Listing created successfully!');
+            Listing::create([
+                'title' => $request->title,
+                'company' => $request->company,
+                'user_id' => auth()->id(),
+                'location' =>$request->location,
+                'website' =>$request->website,
+                'email' =>$request->email,
+                'tags' =>$request->tags,
+                'description'=>$request->description,
+                'logo' => $this->Fupload($request,'logo','users','public') , ]);
+                $logo=Listing::select('logo')->get();
+            return view('',['logo'=>$logo])->with('message', 'Listing created successfully!');
         }
 
+
+
+        protected function save_photo($photo,$path) {
+
+            $file = $photo;
+            $file_ex =$file->getClientOriginalExtension();
+            $filename = time().rand(1,99).'.'.$file_ex;
+            $file->move(public_path($path),$filename);
+            return $filename;
+        }
 
 
             public function edit (Listing $listings){
